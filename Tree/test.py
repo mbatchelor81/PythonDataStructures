@@ -30,11 +30,35 @@ def AVL_Test():
     assert root.right.value == 40
     assert root.left.right.value == 25
     assert root.right.right.value == 50
-    assert root.left.left == None
+    assert root.left.left.value == 10
     assert root.right.left == None
 
-    # Display the AVL tree
+    # Test deleting elements
+    root = avl.delete(root, 20)
+    assert avl.search(root, 20) == None
+
+    avl.inorder_arr = []
+    avl.inorder(root)
+    assert avl.inorder_arr == [10, 25, 30, 40, 50]
+
+    root = avl.delete(root, 30)
+    assert avl.search(root, 30) == None
+    
+    avl.inorder_arr = []
+    avl.inorder(root)
+    assert avl.inorder_arr == [10, 25, 40, 50]
+
+    # Test searching for elements
+    node = avl.search(root, 50)
+    assert node.value == 50
+
+    node = avl.search(root, 100)
+    assert node == None
+
+
+
     print("AVL Tree Test Passed!:")
+
 def BST_Test():
 
     bst = BinarySearchTree()

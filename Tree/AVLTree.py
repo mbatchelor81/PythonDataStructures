@@ -155,7 +155,7 @@ class AVLTree(object):
             return self.rotate_left(root)
         return root
 
-    def get_successor(node):
+    def get_successor(self, node):
         """
         Description: Get the inorder successor of a node in the AVL tree.
 
@@ -168,6 +168,7 @@ class AVLTree(object):
         # loop down to find the leftmost leaf
         while current.left is not None:
             current = current.left
+        return current
 
     def rotate_left(self, x):
         """
@@ -201,8 +202,8 @@ class AVLTree(object):
         - The new root of the subtree after rotation
         - The right child of y becomes the new root, and y becomes the left child of the new root
         """
-        x = y.right
-        t2 = x.left
+        x = y.left
+        t2 = x.right
 
         # Perform rotation
         # 1. New right child of x becomes y
@@ -249,11 +250,12 @@ class AVLTree(object):
         
         Return: List of values in sorted order
         """
-        if root:
-            self.inorder(root.left)
-            self.inorder_arr.append(root.value)
-            self.inorder(root.right)
-            return self.inorder_arr
+        if root is None:
+            return
+        self.inorder(root.left)
+        self.inorder_arr.append(root.value)
+        self.inorder(root.right)
+        return self.inorder_arr
 
     def preorder(self, root):
         """
@@ -262,11 +264,12 @@ class AVLTree(object):
         
         Return: List of values in the order they were visited
         """
-        if root:
-            self.preorder_arr.append(root.value)
-            self.preorder(root.left)
-            self.preorder(root.right)
-            return self.preorder_arr
+        if root is None:
+            return
+        self.preorder_arr.append(root.value)
+        self.preorder(root.left)
+        self.preorder(root.right)
+        return self.preorder_arr
 
     def postorder(self, root):
         """
@@ -275,11 +278,12 @@ class AVLTree(object):
 
         Return: List of values in the order they were visited
         """
-        if root:
-            self.postorder(root.left)
-            self.postorder(root.right)
-            self.postorder_arr.append(root.value)
-            return self.postorder_arr
+        if root is None:
+            return
+        self.postorder(root.left)
+        self.postorder(root.right)
+        self.postorder_arr.append(root.value)
+        return self.postorder_arr
 
     def levelorder(self, root):
         """
